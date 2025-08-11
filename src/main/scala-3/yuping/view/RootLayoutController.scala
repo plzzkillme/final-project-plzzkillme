@@ -16,4 +16,5 @@ class RootLayoutController():
 
   @FXML
   def handleDelete(action: ActionEvent): Unit =
+    MainApp.mainWindowController.map(x => x.handleDelete(action))
     

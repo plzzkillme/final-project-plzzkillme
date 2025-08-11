@@ -25,6 +25,8 @@ lazy val root = (project in file("."))
       "org.apache.derby" % "derbytools" % "10.17.1.0"
     )
   )
+
+fork := true
 //enable for sbt-assembly
 //assembly / assemblyMergeStrategy := {
 //  case PathList("META-INF", xs @ _*) => MergeStrategy.discard // Discard all META-INF files
