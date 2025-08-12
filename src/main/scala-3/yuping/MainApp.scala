@@ -10,15 +10,20 @@ import scalafx.stage.Modality.ApplicationModal
 import scalafx.stage.{Modality, Stage}
 import yuping.MainApp.getClass
 import yuping.model.Food
+import yuping.util.Database
 import yuping.view.{AboutController, FoodEditDialogController, MainWindowController, WelcomeController}
 
 import java.net.URL
 
 object MainApp extends JFXApp3:
+  Database.setupDB()
+  val foodData = new ObservableBuffer[Food]()
   var rootPane: Option[javafx.scene.layout.BorderPane] = None
   val myfood: ObservableBuffer[Food] = ObservableBuffer()
   var cssResource = getClass.getResource("/yuping/view/style.css")
   var mainWindowController: Option[MainWindowController] = None
+
+  foodData ++= Food.getAllFoods
 
   override def start(): Unit = {
     val rootLayoutResource: URL = getClass.getResource("/yuping/view/RootLayout.fxml")
