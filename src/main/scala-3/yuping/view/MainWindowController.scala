@@ -54,9 +54,12 @@ class MainWindowController:
     foodTableView.getSelectionModel.selectedItemProperty.addListener { (_, _, newValue) =>
       Option(newValue) match
         case Some(food) =>
+          // Unbind labels first
           foodNameLabel.textProperty().unbind()
           foodPriceLabel.textProperty().unbind()
           foodExpiryDateLabel.textProperty().unbind()
+
+          // Set labels
           foodNameLabel.textProperty() <== food.name
           foodPriceLabel.textProperty() <== food.price.asString("%.2f")
           foodExpiryDateLabel.textProperty() <==
@@ -64,13 +67,25 @@ class MainWindowController:
               () => food.expiryDate.value.format(dateFormatter),
               food.expiryDate
             )
+
+          // Also fill text fields for editing
+          nametext.setText(food.name.value)
+          pricetext.setText(food.price.value.toString)
+          expirydatetext.setText(food.expiryDate.value.format(dateFormatter))
+
         case None =>
+          // Clear labels
           foodNameLabel.textProperty().unbind()
           foodPriceLabel.textProperty().unbind()
           foodExpiryDateLabel.textProperty().unbind()
           foodNameLabel.setText("")
           foodPriceLabel.setText("")
           foodExpiryDateLabel.setText("")
+
+          // Clear text fields
+          nametext.clear()
+          pricetext.clear()
+          expirydatetext.clear()
     }
 
   @FXML

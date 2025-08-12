@@ -29,7 +29,7 @@
             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
         </rowConstraints>
          <children>
-            <Label text="Food Distribution App" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
+            <Label styleClass="label-header-welcome" text="Food Distribution App" GridPane.columnIndex="1" GridPane.columnSpan="4" GridPane.halignment="CENTER" GridPane.rowIndex="2" GridPane.valignment="CENTER">
                <font>
                   <Font size="36.0" />
                </font>
@@ -42,7 +42,7 @@
       </GridPane>
    </children>
    <styleClass>
-      <String fx:value="root" />
       <String fx:value="background" />
+      <String fx:value="background-image" />
    </styleClass>
 </AnchorPane>
