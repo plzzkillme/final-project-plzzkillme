@@ -162,7 +162,7 @@
 
 .root {
     -fx-background-image: url("/images/food.png");
-    -fx-background-size: cover;   /* Scale to fill */
+    -fx-background-size: 100% auto;   /* Scale to fill */
     -fx-background-repeat: no-repeat;
-    -fx-background-position: center center;
+    -fx-background-position: center -100px;
 }
