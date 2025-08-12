@@ -6,7 +6,7 @@ import yuping.util.Database
 import yuping.util.DateUtil._
 import scalikejdbc._
 import scala.util.{Try, Success, Failure}
-
+import scalikejdbc.{DB, DBSession}
 
 class Food (_name: String, _price: Double, _expiryDate: LocalDate ) extends Database :
   val name : StringProperty = StringProperty(_name)
@@ -46,14 +46,17 @@ class Food (_name: String, _price: Double, _expiryDate: LocalDate ) extends Data
       throw new Exception("Food not Exists in Database")
 
   def isExist: Boolean =
-    DB readOnly { implicit session =>
+    DB readOnly { implicit session: DBSession =>
       sql"""
-       select * from food where
-       name = ${name.value} and price = ${price.value}
-      """.map(rs => rs.string("name")).single.apply()
+      select 1 from food
+      where name = ${name.value} and price = ${price.value}
+    """
+        .map(_.int(1))
+        .single
+        .apply()               // returns Option[Int]
     } match
-      case Some(x) => true
-      case None => false
+      case Some(_) => true
+      case None    => false
 
 
 object Food extends Database:

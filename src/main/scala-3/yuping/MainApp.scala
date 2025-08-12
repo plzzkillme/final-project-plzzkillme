@@ -19,7 +19,7 @@ object MainApp extends JFXApp3:
   Database.setupDB()
   val foodData = new ObservableBuffer[Food]()
   var rootPane: Option[javafx.scene.layout.BorderPane] = None
-  val myfood: ObservableBuffer[Food] = ObservableBuffer()
+  val myfood: ObservableBuffer[Food] = ObservableBuffer(Food.getAllFoods: _*)
   var cssResource = getClass.getResource("/yuping/view/style.css")
   var mainWindowController: Option[MainWindowController] = None
 

@@ -86,91 +86,65 @@ class MainWindowController:
     else if nameInput.forall(_.isDigit) then
       errorMessage += "Name must be a string.\n"
 
-    try
+    val priceValue = try
       priceInput.toDouble
     catch
       case _: NumberFormatException =>
         errorMessage += "Price must be a valid number.\n"
+        -1
 
-    expiryInput.parseLocalDate match
+    val expiryDateValue = expiryInput.parseLocalDate match
+      case Some(date) => date
       case None =>
         errorMessage += s"Expiry date must be in format $DATE_PATTERN.\n"
-      case Some(_) => // OK
+        null
 
     if errorMessage.nonEmpty then
       showError(errorMessage)
       return
 
-    // If no errors, create the new food object
-    val priceValue = priceInput.toDouble
-    val expiryDateValue = expiryInput.parseLocalDate.get
-    val food = new Food(nameInput, priceValue, expiryDateValue)
-
-    // Save to database first
-    food.save() match
+    val newFood = new Food(nameInput, priceValue, expiryDateValue)
+    newFood.save() match
       case Success(_) =>
-        MainApp.myfood += food
-        nametext.clear()
-        pricetext.clear()
-        expirydatetext.clear()
+        MainApp.myfood += newFood
       case Failure(e) =>
-        val alert = new Alert(AlertType.Warning):
-          initOwner(MainApp.stage)
-          title = "Failed to Save"
-          headerText = "Database Error"
-          contentText = s"Database problem: ${e.getMessage}"
-        .showAndWait()
+        showError("Database error: could not save new food.")
+
+    nametext.clear()
+    pricetext.clear()
+    expirydatetext.clear()
 
   @FXML
   def handleEdit(action: ActionEvent): Unit =
-    val selectedFood = foodTableView.selectionModel().selectedItem.value
+    val food = foodTableView.selectionModel.value.selectedItem.value
+    if food != null then
+      food.name.value = nametext.text.value
+      food.price.value = pricetext.text.value.toDouble
+      expirydatetext.text.value.parseLocalDate match
+        case Some(date: LocalDate) => food.expiryDate.value = date
+        case None =>
+          showError(s"Expiry date must be in format $DATE_PATTERN.")
+          return
 
-    if (selectedFood != null) then
-      val okClicked = MainApp.showFoodEditDialog(selectedFood)
-
-      if okClicked then
-        selectedFood.save() match
-          case Success(_) =>
-            // Refresh UI so the table shows updated values
-            foodTableView.refresh()
-          case Failure(e) =>
-            val alert = new Alert(AlertType.Warning):
-              initOwner(MainApp.stage)
-              title = "Failed to Save"
-              headerText = "Database Error"
-              contentText = s"Database problem: ${e.getMessage}"
-            .showAndWait()
+      food.save() match
+        case Success(_) => () // Successfully saved
+        case Failure(e) => showError("Database error: could not update food.")
     else
-      val alert = new Alert(AlertType.Warning):
-        initOwner(MainApp.stage)
-        title = "No Selection"
-        headerText = "No Food Selected"
-        contentText = "Please select a food in the table."
-      .showAndWait()
+      showError("No food selected.")
 
   @FXML
-  def handleDelete(action: ActionEvent): Unit = {
-    val index = foodTableView.selectionModel().selectedIndex.value
-    val selectedFood = foodTableView.selectionModel().selectedItem.value
-    if (index >= 0) then
-      selectedFood.save() match
-        case Success(x) =>
-          foodTableView.items().remove(index)
+  def handleDelete(action: ActionEvent): Unit =
+    val index = foodTableView.selectionModel.value.selectedIndex.value
+    val selectedFood = foodTableView.selectionModel.value.selectedItem.value
+
+    if index >= 0 && selectedFood != null then
+      selectedFood.delete() match
+        case Success(_) =>
+          MainApp.myfood.remove(index)
         case Failure(e) =>
-          val alert = new Alert(AlertType.Error):
-            initOwner(MainApp.stage)
-            title = "Failed to Save"
-            headerText = "Database Error"
-            contentText = "Database problem filed to save changes"
-          .showAndWait()
+          showError("Database error: could not delete food.")
     else
-      val alert = new Alert(AlertType.Error):
-        initOwner(MainApp.stage)
-        title = "No selection"
-        headerText = "No food selected"
-        contentText = "Please select a food in the table."
-      .showAndWait()
-  }
+      showError("No food selected.")
 
   @FXML
   def handleBack(action: ActionEvent): Unit =
