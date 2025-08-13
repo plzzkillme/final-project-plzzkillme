@@ -14,11 +14,8 @@
 <AnchorPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yuping.view.DistributionWindowController">
 
     <children>
-        <ScrollPane fitToHeight="true" fitToWidth="true" AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+        <ScrollPane fitToHeight="true" fitToWidth="true" minHeight="300" minWidth="600" prefHeight="800" prefWidth="1000.0" AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
             <VBox spacing="15">
-                <padding>
-                    <Insets bottom="10" left="10" right="10" top="10" />
-                </padding>
 
                 <!-- Donor Section -->
                 <TitledPane expanded="true" text="Donors">
@@ -26,7 +23,7 @@
                         <padding>
                             <Insets bottom="10" left="10" right="10" top="10" />
                         </padding>
-                        <TableView fx:id="donorTable">
+                        <TableView fx:id="donorTable" prefHeight="300">
                             <columns>
                                 <TableColumn fx:id="donorNameColumn" prefWidth="150" text="Name" />
                                 <TableColumn fx:id="donorContactColumn" prefWidth="150" text="Contact" />
@@ -48,7 +45,7 @@
                         <padding>
                             <Insets bottom="10" left="10" right="10" top="10" />
                         </padding>
-                        <TableView fx:id="recipientTable">
+                        <TableView fx:id="recipientTable" prefHeight="300">
                             <columns>
                                 <TableColumn fx:id="recipientNameColumn" prefWidth="150" text="Name" />
                                 <TableColumn fx:id="recipientContactColumn" prefWidth="150" text="Contact" />
@@ -70,7 +67,7 @@
                         <padding>
                             <Insets bottom="10" left="10" right="10" top="10" />
                         </padding>
-                        <TableView fx:id="foodTable">
+                        <TableView fx:id="foodTable" prefHeight="300">
                             <columns>
                                 <TableColumn fx:id="foodNameColumn" prefWidth="150" text="Name" />
                                 <TableColumn fx:id="foodPriceColumn" prefWidth="100" text="Price" />
@@ -94,7 +91,7 @@
                         <padding>
                             <Insets bottom="10" left="10" right="10" top="10" />
                         </padding>
-                        <TableView fx:id="distributionTable">
+                        <TableView fx:id="distributionTable" prefHeight="300">
                             <columns>
                                 <TableColumn fx:id="distributionDonorColumn" prefWidth="150" text="Donor" />
                                 <TableColumn fx:id="distributionRecipientColumn" prefWidth="150" text="Recipient" />
@@ -111,6 +108,9 @@
                         </HBox>
                     </VBox>
                 </TitledPane>
+            <padding>
+               <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+            </padding>
 
             </VBox>
         </ScrollPane>

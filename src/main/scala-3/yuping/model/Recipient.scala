@@ -9,13 +9,13 @@ class Recipient(val name: StringProperty, val contact: StringProperty) {
   def save(): Try[Unit] = Try {
     DB autoCommit { implicit session =>
       val updated = sql"""
-      UPDATE Donor SET contact = ${contact.value}
+      UPDATE Recipient SET contact = ${contact.value}
       WHERE name = ${name.value}
     """.update.apply()
 
       if (updated == 0) {
         sql"""
-        INSERT INTO Donor (name, contact)
+        INSERT INTO Recipient (name, contact)
         VALUES (${name.value}, ${contact.value})
       """.update.apply()
       }
