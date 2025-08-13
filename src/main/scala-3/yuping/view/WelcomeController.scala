@@ -10,3 +10,7 @@ class WelcomeController():
   def handleStart(): Unit =
     //call the main window
     MainApp.showMainWindow()
+
+  @FXML
+  def handleOpenDistributionWindow(): Unit =
+    MainApp.showDistributionWindow() 

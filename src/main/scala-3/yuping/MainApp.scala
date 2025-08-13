@@ -11,7 +11,7 @@ import scalafx.stage.{Modality, Stage}
 import yuping.MainApp.getClass
 import yuping.model.Food
 import yuping.util.Database
-import yuping.view.{AboutController, FoodEditDialogController, MainWindowController, WelcomeController}
+import yuping.view.{AboutController, DistributionWindowController, FoodEditDialogController, MainWindowController, WelcomeController}
 
 import java.net.URL
 
@@ -90,6 +90,35 @@ object MainApp extends JFXApp3:
     control.food = food
     dialog.showAndWait()
     control.okClicked
+
+  def showDistributionWindow(): Unit =
+    try
+      val loader = new FXMLLoader(getClass.getResource("/yuping/view/DistributionWindow.fxml"))
+      val page = loader.load[javafx.scene.layout.AnchorPane]()
+      val dialogStage = new Stage()
+      dialogStage.setTitle("Distribution Manager")
+      dialogStage.initOwner(stage)
+      dialogStage.setScene(new Scene(page))
+      dialogStage.showAndWait()
+    catch
+      case e: Exception => e.printStackTrace()
+
+  def showRecipientWindow(): Unit =
+    try
+      val loader = new javafx.fxml.FXMLLoader(getClass.getResource("/yuping/view/RecipientWindow.fxml"))
+      val page = loader.load[javafx.scene.layout.AnchorPane]()
+
+      val dialogStage = new javafx.stage.Stage()
+      dialogStage.setTitle("Recipient Manager")
+      dialogStage.initOwner(stage)
+      dialogStage.setScene(new javafx.scene.Scene(page))
+
+      dialogStage.showAndWait()
+    catch
+      case e: Exception =>
+        e.printStackTrace()
+
+
 
 
 

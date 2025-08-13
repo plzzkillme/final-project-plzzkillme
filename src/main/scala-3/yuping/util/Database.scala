@@ -1,6 +1,6 @@
 package yuping.util
 import scalikejdbc.*
-import yuping.model.Food
+import yuping.model.{Food, Donor, Recipient, DistributionRecord}
 
 trait Database :
   val derbyDriverClassname = "org.apache.derby.jdbc.EmbeddedDriver"
@@ -13,8 +13,11 @@ trait Database :
 
 object Database extends Database :
   def setupDB() =
-    if (!hasDBInitialize)
+    if (!hasDBInitialize) then
+      Donor.initializeTable()
+      Recipient.initializeTable()
       Food.initializeTable()
+      DistributionRecord.initializeTable()
   def hasDBInitialize : Boolean =
     DB getTable "Food" match
       case Some(x) => true

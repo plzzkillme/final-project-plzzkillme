@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.TitledPane?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<AnchorPane stylesheets="@style.css" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="yuping.view.DistributionWindowController">
+
+    <children>
+        <ScrollPane fitToHeight="true" fitToWidth="true" AnchorPane.bottomAnchor="50" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0" AnchorPane.topAnchor="0">
+            <VBox spacing="15">
+                <padding>
+                    <Insets bottom="10" left="10" right="10" top="10" />
+                </padding>
+
+                <!-- Donor Section -->
+                <TitledPane expanded="true" text="Donors">
+                    <VBox spacing="5">
+                        <padding>
+                            <Insets bottom="10" left="10" right="10" top="10" />
+                        </padding>
+                        <TableView fx:id="donorTable">
+                            <columns>
+                                <TableColumn fx:id="donorNameColumn" prefWidth="150" text="Name" />
+                                <TableColumn fx:id="donorContactColumn" prefWidth="150" text="Contact" />
+                            </columns>
+                        </TableView>
+                        <HBox spacing="5">
+                            <TextField fx:id="donorNameField" promptText="Name" />
+                            <TextField fx:id="donorContactField" promptText="Contact" />
+                            <Button onAction="#handleAddDonor" text="Add" />
+                            <Button onAction="#handleEditDonor" text="Edit" />
+                            <Button onAction="#handleDeleteDonor" text="Delete" />
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+
+                <!-- Recipient Section -->
+                <TitledPane expanded="true" text="Recipients">
+                    <VBox spacing="5">
+                        <padding>
+                            <Insets bottom="10" left="10" right="10" top="10" />
+                        </padding>
+                        <TableView fx:id="recipientTable">
+                            <columns>
+                                <TableColumn fx:id="recipientNameColumn" prefWidth="150" text="Name" />
+                                <TableColumn fx:id="recipientContactColumn" prefWidth="150" text="Contact" />
+                            </columns>
+                        </TableView>
+                        <HBox spacing="5">
+                            <TextField fx:id="recipientNameField" promptText="Name" />
+                            <TextField fx:id="recipientContactField" promptText="Contact" />
+                            <Button onAction="#handleAddRecipient" text="Add" />
+                            <Button onAction="#handleEditRecipient" text="Edit" />
+                            <Button onAction="#handleDeleteRecipient" text="Delete" />
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+
+                <!-- Food Section -->
+                <TitledPane expanded="true" text="Food">
+                    <VBox spacing="5">
+                        <padding>
+                            <Insets bottom="10" left="10" right="10" top="10" />
+                        </padding>
+                        <TableView fx:id="foodTable">
+                            <columns>
+                                <TableColumn fx:id="foodNameColumn" prefWidth="150" text="Name" />
+                                <TableColumn fx:id="foodPriceColumn" prefWidth="100" text="Price" />
+                                <TableColumn fx:id="foodExpiryColumn" prefWidth="150" text="Expiry Date" />
+                            </columns>
+                        </TableView>
+                        <HBox spacing="5">
+                            <TextField fx:id="foodNameField" promptText="Name" />
+                            <TextField fx:id="foodPriceField" promptText="Price" />
+                            <TextField fx:id="foodExpiryField" promptText="YYYY-MM-DD" />
+                            <Button onAction="#handleAddFood" text="Add" />
+                            <Button onAction="#handleEditFood" text="Edit" />
+                            <Button onAction="#handleDeleteFood" text="Delete" />
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+
+                <!-- Distribution Records Section -->
+                <TitledPane expanded="true" text="Distribution Records">
+                    <VBox spacing="5">
+                        <padding>
+                            <Insets bottom="10" left="10" right="10" top="10" />
+                        </padding>
+                        <TableView fx:id="distributionTable">
+                            <columns>
+                                <TableColumn fx:id="distributionDonorColumn" prefWidth="150" text="Donor" />
+                                <TableColumn fx:id="distributionRecipientColumn" prefWidth="150" text="Recipient" />
+                                <TableColumn fx:id="distributionFoodColumn" prefWidth="150" text="Food" />
+                                <TableColumn fx:id="distributionDateColumn" prefWidth="100" text="Date" />
+                            </columns>
+                        </TableView>
+                        <HBox spacing="5">
+                            <TextField fx:id="distDonorField" promptText="Donor" />
+                            <TextField fx:id="distRecipientField" promptText="Recipient" />
+                            <TextField fx:id="distFoodField" promptText="Food" />
+                            <TextField fx:id="distDateField" promptText="YYYY-MM-DD" />
+                            <Button onAction="#handleAddDistribution" text="Add" />
+                        </HBox>
+                    </VBox>
+                </TitledPane>
+
+            </VBox>
+        </ScrollPane>
+
+        <!-- Bottom Close Button -->
+        <HBox alignment="CENTER" AnchorPane.bottomAnchor="0" AnchorPane.leftAnchor="0" AnchorPane.rightAnchor="0">
+            <padding>
+                <Insets bottom="10" left="10" right="10" top="10" />
+            </padding>
+            <Button onAction="#handleClose" text="Close" />
+        </HBox>
+    </children>
+</AnchorPane>

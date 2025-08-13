@@ -176,3 +176,58 @@
     -fx-background-radius: 8px;
     -fx-padding: 8px;
 }
+
+.titled-pane {
+    -fx-background-color: #0f1e33;
+    -fx-text-fill: #d0e7ff;
+    -fx-border-color: #4da3ff;
+}
+
+.titled-pane > .title {
+    -fx-background-color: #1f3b5f;
+    -fx-font-family: "Segoe UI Semibold";
+    -fx-text-fill: #d0e7ff;
+    -fx-font-size: 12pt;
+}
+
+.vbox, .hbox {
+    -fx-background-color: transparent;
+}
+
+.scroll-pane {
+    -fx-background: #0f1e33;
+}
+
+.scroll-bar:vertical, .scroll-bar:horizontal {
+    -fx-background-color: #102f4f;
+}
+
+.table-row-cell:hover {
+    -fx-background-color: #1f3b5f;
+}
+
+.table-row-cell:selected {
+    -fx-background-color: #4da3ff;
+    -fx-text-fill: #0f1e33;
+}
+
+.text-field:focused {
+    -fx-border-color: #4da3ff;
+}
+
+.text-field .text {
+    -fx-fill: #d0e7ff;
+}
+
+.text-field .prompt-text {
+    -fx-fill: #a4d4ff;
+    -fx-opacity: 0.5;
+}
+
+.button-close {
+    -fx-background-color: #ff4d4d;
+    -fx-text-fill: white;
+}
+.button-close:hover {
+    -fx-background-color: #ff6666;
+}
